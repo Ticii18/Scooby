@@ -57,7 +57,7 @@
 
 .header .btn-container {
     display: flex;
-    gap: 0; 
+    gap: 0;
 }
 
 .header .btn button {
@@ -90,7 +90,7 @@
 .post {
     background: white;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     padding: 15px;
 }
