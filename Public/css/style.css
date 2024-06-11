@@ -57,7 +57,7 @@
 
 .header .btn-container {
     display: flex;
-    gap: 0;
+    gap: 0; 
 }
 
 .header .btn button {
@@ -69,15 +69,14 @@
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
-    margin: 3px;
+    margin: 5px;
 }
 
 .header .btn button:hover {
     background-color: #e2f1f8;
     color: #ffbc0e;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
-
 
 
 .feed {
@@ -90,7 +89,7 @@
 .post {
     background: white;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     margin-bottom: 20px;
     padding: 15px;
 }
@@ -143,4 +142,25 @@
 
 .post-footer button:hover {
     color: #ffbc0e;
+}
+
+
+.add-post-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffbc0e;
+    color: #1b3039;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.add-post-btn:hover {
+    background-color: #ffdb4d;
 }

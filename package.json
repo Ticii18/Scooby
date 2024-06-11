@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch app.js"
+    "dev": "nodemon --watch app.js --watch public --ext js,html,css app.js"
   },
   "keywords": [],
   "author": "",
@@ -13,5 +13,8 @@
   "dependencies": {
     "express": "^4.19.2",
     "mysql2": "^3.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.3"
   }
 }
