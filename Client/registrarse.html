@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario de Registro</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        border-radius: 15%;
+        max-width: 600px;
+        margin: 130px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    }
+    input[type="text"], input[type="email"], input[type="password"], input[type="submit"] {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    input[type="submit"] {
+        background-color: rgba(230, 70, 82);
+        color: #fff;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: rgba(200, 50, 62);
+    }
+    .header {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 85px;
+        padding: 5px 10%;
+        background: rgba(230, 70, 82);
+    }
+    .header .logo {
+        cursor: pointer;
+    }
+    .header .logo img {
+        height: 70px;
+        width: auto;
+        transition: all 0.3s;
+        border-radius: 50%;
+    }
+    .header .logo img:hover {
+        transform: scale(1.2);
+    }
+    .header .nav-links {
+        list-style: none;
+        display: flex;
+    }
+    .header .nav-links li {
+        display: inline-block;
+        padding: 0 20px;
+    }
+    .header .nav-links li:hover {
+        transform: scale(1.1);
+    }
+    .header .nav-links a {
+        font-weight: 700;
+        color: #eceff1;
+        text-decoration: none;
+    }
+    .header .nav-links li a:hover {
+        color: #ffbc0e;
+    }
+    .header .btn-container {
+        display: flex;
+        gap: 0;
+    }
+    .header .btn button {
+        font-weight: 700;
+        color: #1b3039;
+        padding: 9px 25px;
+        background: #ffffff;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease 0s;
+        margin: 3px;
+    }
+    .header .btn button:hover {
+        background-color: #e2f1f8;
+        color: #ffbc0e;
+        transform: scale(1.1);
+    }
+</style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="index.html"><img src="./assets/img/logo.jpg" alt="Logo de la marca"></a>
+        </div>
+      
+    </header>
+<div class="container">
+    <h2>Formulario de Registro</h2>
+    <form id="registerForm" method="post">
+        <label for="username">Nombre de usuario:</label>
+        <input type="text" id="username" name="username" required>
+        
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+        
+        <label for="confirm-password">Confirmar contraseña:</label>
+        <input type="password" id="confirmPassword" name="confirm-password" required>
+        
+        <input type="submit" value="Registrarse">
+    </form>
+</div>
+
+<script src="assets/js/register.js"></script>
+</body>
+</html>

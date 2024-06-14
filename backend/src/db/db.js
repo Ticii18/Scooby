@@ -1,0 +1,16 @@
+const mysql2 = require("mysql2/promise");
+
+const newConex = async () => {
+        const conex = await mysql2.createConnection({
+            host: "localhost",
+            user: "root",
+            database: "hogaranimales"
+        });
+        return conex
+   
+}
+
+
+module.exports ={
+    newConex
+}
