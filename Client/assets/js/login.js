@@ -16,7 +16,10 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
         if (response.ok) {
             const data = await response.json();
     
-            // Redirigir al usuario a la pantalla principal después de iniciar sesión exitosamente
+            // Almacenar el token en el almacenamiento local
+            localStorage.setItem('token', data.token);
+    
+            // Redirigir al usuario a la página principal después de iniciar sesión exitosamente
             window.location.href = '/index.html'; // Reemplazar con la ruta correcta
     
             console.log('Inicio de sesión exitoso');
@@ -27,4 +30,43 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
     } catch (error) {
         console.error('Error al procesar la solicitud:', error);
     }
-})
+    document.addEventListener('DOMContentLoaded', () => {
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+    
+        // Al hacer clic en el botón de inicio de sesión, se inicia sesión y se guarda el token en el almacenamiento local
+        loginBtn.addEventListener('click', () => {
+            // Aquí iría tu código para iniciar sesión y obtener el token
+            // Después de obtener el token, guárdalo en el almacenamiento local
+            localStorage.setItem('token', 'tu-token-aqui');
+    
+            // Oculta el botón de inicio de sesión y muestra el botón de cerrar sesión
+            loginBtn.style.display = 'none';
+            logoutBtn.style.display = 'inline';
+        });
+    
+        // Al hacer clic en el botón de cerrar sesión, elimina el token del almacenamiento local
+        logoutBtn.addEventListener('click', () => {
+            // Elimina el token del almacenamiento local
+            localStorage.removeItem('token');
+    
+            // Oculta el botón de cerrar sesión y muestra el botón de inicio de sesión
+            logoutBtn.style.display = 'none';
+            loginBtn.style.display = 'inline';
+        });
+    
+        // Al cargar la página, verifica si hay un token en el almacenamiento local
+        const token = localStorage.getItem('token');
+        if (token) {
+            // Si hay un token, muestra el botón de cerrar sesión y oculta el botón de inicio de sesión
+            logoutBtn.style.display = 'inline';
+            loginBtn.style.display = 'none';
+        } else {
+            // Si no hay un token, muestra el botón de inicio de sesión y oculta el botón de cerrar sesión
+            loginBtn.style.display = 'inline';
+            logoutBtn.style.display = 'none';
+        }
+    });
+    
+});

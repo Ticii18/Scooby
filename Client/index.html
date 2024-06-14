@@ -23,50 +23,66 @@
             </ul>
         </nav>
         <div class="btn-container">
-            <a class="btn" href="iniciarSesion.html"><button>Iniciar Sesion</button></a>
-            <a class="btn" href="registrarse.html"><button>Registrarse</button></a>
+            <a id="loginBtn" class="btn" href="iniciarSesion.html"><button>Iniciar Sesion</button></a>
+            <a id="logoutBtn" class="btn" style="display: none;" href="#"><button>Cerrar Sesion</button></a>
+            <span id="username" style="display: none;"></span>
+
         </div>
     </header>
     <main class="feed">
-        <div class="post">
-            <div class="post-header">
-                <img src="./img/1.jpg" alt="User profile picture">
-                <div>
-                    <h3>John Doe</h3>
-                    <p>2 hours ago</p>
-                </div>
-            </div>
-            <div class="post-content">
-                <p>This is a sample post content. It contains text, images, or other media.</p>
-                <img src="./img/perrito 1.jpg" alt="Post image">
-            </div>
-            <div class="post-footer">
-
-                <button>Comment</button>
-                <button>Share</button>
-            </div>
-        </div>
-        <div class="post">
-            <div class="post-header">
-                <img src="./img/2.jpg" alt="User profile picture">
-                <div>
-                    <h3>Jane Smith</h3>
-                    <p>5 hours ago</p>
-                </div>
-            </div>
-            <div class="post-content">
-                <p>Another example of a post content with different media and text.</p>
-                <img src="./img/perrito 2.jpg" alt="Post image">
-            </div>
-            <div class="post-footer">
-
-                <button>Comment</button>
-                <button>Share</button>
-            </div>
-        </div>
-        <a href="subirPubli.html"><button class="add-post-btn">Añadir Publicacion</button></a>
-
+        <!-- Aquí va el contenido principal de tu página -->
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const usernameSpan = document.getElementById('username');
+
+            // Event listener para el botón de inicio de sesión
+            loginBtn.addEventListener('click', async () => {
+                try {
+                    // Realizar una solicitud de inicio de sesión al backend
+                    const formData = new FormData(document.getElementById('loginForm'));
+                    const response = await fetch('/auth/login', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+
+                        // Almacenar el token en el almacenamiento local
+                        localStorage.setItem('token', data.token);
+
+                        // Hacer una solicitud al backend para obtener el nombre de usuario
+                        const userResponse = await fetch('/auth/user', {
+                            headers: {
+                                Authorization: `Bearer ${data.token}`
+                            }
+                        });
+
+                        if (userResponse.ok) {
+                            const userData = await userResponse.json();
+                            const { username } = userData;
+
+                            // Mostrar el nombre de usuario
+                            usernameSpan.textContent = `Bienvenido ${username}`;
+                            usernameSpan.style.display = 'inline-block';
+
+                            // Ocultar el botón de inicio de sesión y mostrar el botón de cierre de sesión
+                            loginBtn.style.display = 'none';
+                            logoutBtn.style.display = 'inline-block';
+                        }
+                    } else {
+                        console.error('Error al iniciar sesión:', response.statusText);
+                    }
+                } catch (error) {
+                    console.error('Error al procesar la solicitud:', error);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

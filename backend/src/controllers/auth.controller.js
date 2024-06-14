@@ -35,10 +35,10 @@ const registerUser = async (req, res) => {
 };
 
 const login = async (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
     // Verificar si los campos requeridos están presentes
-    if (!email || !password) {
+    if (!username || !password) {
         return res.status(400).send("Por favor, complete todos los campos del formulario");
     }
 
@@ -47,7 +47,7 @@ const login = async (req, res) => {
         const conex = await newConex();
 
         // Consulta para verificar las credenciales del usuario
-        const [usuario] = await conex.query("SELECT id_usuario FROM usuarios WHERE email = ? AND contraseña = ?", [email, password]);
+        const [usuario] = await conex.query("SELECT id_usuario FROM usuarios WHERE nombre_usuario = ? AND contraseña = ?", [username, password]);
 
         // Si no se encuentra el usuario, devolver un error de credenciales inválidas
         if (!usuario) {
@@ -60,12 +60,13 @@ const login = async (req, res) => {
         // Cerrar la conexión a la base de datos
         await conex.end();
 
-        // Enviar el token como respuesta
-        res.send({ token });
+        // Enviar el token y el nombre de usuario como respuesta
+        res.send({ token, username: usuario.nombre_usuario });
     } catch (error) {
         // Manejar errores
         console.error("Error al iniciar sesión:", error);
         res.status(500).send("Error interno del servidor");
     }
 };
+
 module.exports = { registerUser, login };
