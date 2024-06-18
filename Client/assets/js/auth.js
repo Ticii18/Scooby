@@ -6,13 +6,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     // En caso de que no exita el token, mostraremos en el navbar los botones para iniciar sesion y registrarse.
     if(!token){
-        document.getElementById('nav-item').innerHTML = `
-            <li><a href="login.html">Login</a></li>
-            <li><a href="register.html">Register</a></li>`;
+        console.log("console de auth");
     } else {
 
         // En caso de que si exista el token, mostraremos un boton de cerrar sesión.
-        document.getElementById('nav-item').innerHTML = `<li><a href="" id="logout">Cerrar Sesión</a></li>`;
+        document.getElementById('navv').innerHTML = `<a class="btn" href="" id="logout"><button>Cerrar Sesion</button></a>`;
 
 
         // Le agregamos un evento click a dicho boton.

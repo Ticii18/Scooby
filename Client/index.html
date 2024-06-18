@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>navbar Tres</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    
+
 </head>
 
 <body>
@@ -22,7 +24,7 @@
                 <li><a href="#">Mapa</a></li>
             </ul>
         </nav>
-        <div class="btn-container">
+        <div class="btn-container" id="navv">
             <a id="loginBtn" class="btn" href="iniciarSesion.html"><button>Iniciar Sesion</button></a>
             <a id="logoutBtn" class="btn" style="display: none;" href="#"><button>Cerrar Sesion</button></a>
             <span id="username" style="display: none;"></span>
@@ -33,56 +35,8 @@
         <!-- Aquí va el contenido principal de tu página -->
     </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const loginBtn = document.getElementById('loginBtn');
-            const logoutBtn = document.getElementById('logoutBtn');
-            const usernameSpan = document.getElementById('username');
-
-            // Event listener para el botón de inicio de sesión
-            loginBtn.addEventListener('click', async () => {
-                try {
-                    // Realizar una solicitud de inicio de sesión al backend
-                    const formData = new FormData(document.getElementById('loginForm'));
-                    const response = await fetch('/auth/login', {
-                        method: 'POST',
-                        body: formData
-                    });
-
-                    if (response.ok) {
-                        const data = await response.json();
-
-                        // Almacenar el token en el almacenamiento local
-                        localStorage.setItem('token', data.token);
-
-                        // Hacer una solicitud al backend para obtener el nombre de usuario
-                        const userResponse = await fetch('/auth/user', {
-                            headers: {
-                                Authorization: `Bearer ${data.token}`
-                            }
-                        });
-
-                        if (userResponse.ok) {
-                            const userData = await userResponse.json();
-                            const { username } = userData;
-
-                            // Mostrar el nombre de usuario
-                            usernameSpan.textContent = `Bienvenido ${username}`;
-                            usernameSpan.style.display = 'inline-block';
-
-                            // Ocultar el botón de inicio de sesión y mostrar el botón de cierre de sesión
-                            loginBtn.style.display = 'none';
-                            logoutBtn.style.display = 'inline-block';
-                        }
-                    } else {
-                        console.error('Error al iniciar sesión:', response.statusText);
-                    }
-                } catch (error) {
-                    console.error('Error al procesar la solicitud:', error);
-                }
-            });
-        });
-    </script>
+    <script src="./assets/js/auth.js" ></script>
+    <script src="./assets/js/landing.js" ></script>
 </body>
 
 </html>

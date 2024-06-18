@@ -32,9 +32,6 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
     }
     document.addEventListener('DOMContentLoaded', () => {
         const loginBtn = document.getElementById('loginBtn');
-        const registerBtn = document.getElementById('registerBtn');
-        const logoutBtn = document.getElementById('logoutBtn');
-    
         // Al hacer clic en el botón de inicio de sesión, se inicia sesión y se guarda el token en el almacenamiento local
         loginBtn.addEventListener('click', () => {
             // Aquí iría tu código para iniciar sesión y obtener el token
@@ -45,17 +42,7 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
             loginBtn.style.display = 'none';
             logoutBtn.style.display = 'inline';
         });
-    
-        // Al hacer clic en el botón de cerrar sesión, elimina el token del almacenamiento local
-        logoutBtn.addEventListener('click', () => {
-            // Elimina el token del almacenamiento local
-            localStorage.removeItem('token');
-    
-            // Oculta el botón de cerrar sesión y muestra el botón de inicio de sesión
-            logoutBtn.style.display = 'none';
-            loginBtn.style.display = 'inline';
-        });
-    
+        
         // Al cargar la página, verifica si hay un token en el almacenamiento local
         const token = localStorage.getItem('token');
         if (token) {
