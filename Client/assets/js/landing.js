@@ -10,12 +10,25 @@ const pintarPublicaciones = (data) => {
     data.forEach((publicacion, index) => {
         // Vamos agregando tr's con la información de cada publicación.
         tbody.innerHTML += `
-            <tr>
-                <td>${index + 1}</td>
-                <td>${publicacion.titulo}</td>
-                <td>${publicacion.contenido}</td>
-                <td>${publicacion.imagen_url ? `<img src="${publicacion.imagen_url}" alt="${publicacion.titulo}" width="200">` : ''}</td>
-            </tr>`;
+            <div class="post">
+        <div class="post-header">
+      
+            <div class="post-header-info">
+                <h3>${publicacion.titulo}</h3>
+         
+            </div>
+        </div>
+        <div class="post-content">
+            <p>${publicacion.contenido}</</p>
+           <img src="${publicacion.imagen_url}" >
+        </div>
+        <div class="post-actions">
+            <button>Me gusta</button>
+            <button>Comentar</button>
+            <button>Compartir</button>
+        </div>
+    </div>
+        `;
     });
 };
 

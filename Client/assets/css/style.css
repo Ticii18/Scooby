@@ -1,11 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&display=swap');
-
-* {
-    box-sizing: border-box;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
     margin: 0;
     padding: 0;
-    font-family: 'Nunito', sans-serif;
-    font-size: 20px;
+    
 }
 
 .header {
@@ -57,7 +55,7 @@
 
 .header .btn-container {
     display: flex;
-    gap: 0; 
+    gap: 0;
 }
 
 .header .btn button {
@@ -77,90 +75,74 @@
     color: #ffbc0e;
     transform: scale(1.05);
 }
-
-
-.feed {
-    width: 100%;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 0 20px;
+.feed{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
 }
 
 .post {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
     margin-bottom: 20px;
-    padding: 15px;
 }
 
+/* Estilos del encabezado */
 .post-header {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
-.post-header img {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.post-header div h3 {
+.post-header-info h3 {
+    margin: 0;
     font-size: 18px;
-    margin-bottom: 5px;
+    color: rgb(230, 70, 82); /* Azul de Facebook */
 }
 
-.post-header div p {
-    font-size: 14px;
-    color: gray;
+/* Estilos del contenido */
+.post-content {
+    margin-bottom: 10px;
 }
 
 .post-content p {
     margin-bottom: 10px;
+    color: #1c1e21;
+    font-size: 16px;
 }
 
 .post-content img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-.post-footer {
-    display: flex;
-    justify-content: space-around;
+    width: 600px;
+    border-radius: 8px;
+    display: block;
     margin-top: 10px;
 }
 
-.post-footer button {
-    background: none;
+/* Estilos de los botones de acción */
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-actions button {
+    background-color: #f0f2f5;
+    color: #606770;
     border: none;
-    color: #1b3039;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.post-footer button:hover {
-    color: #ffbc0e;
-}
-
-
-.add-post-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #ffbc0e;
-    color: #1b3039;
-    font-weight: bold;
-    font-size: 16px;
     padding: 10px 20px;
-    border: none;
-    border-radius: 30px;
+    border-radius: 20px;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
     transition: background-color 0.3s ease;
 }
 
-.add-post-btn:hover {
-    background-color: #ffdb4d;
+.post-actions button:hover {
+    background-color: #e9ebee;
 }
