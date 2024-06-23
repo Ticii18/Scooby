@@ -6,60 +6,70 @@ const pintarPublicaciones = (data) => {
     // Reseteamos el contenido html del tbody o div
     tbody.innerHTML = '';
 
+    // Verificar qué propiedades tiene cada objeto de publicacion
+
     // Recorremos todas las publicaciones con un forEach
     data.forEach((publicacion, index) => {
-        console.log('Imagen URL:', publicacion.imagen_url); // Verificar la URL de la imagen
+        // Creamos un botón de eliminar por cada publicación
+        const botonEliminar = document.createElement('button');
+        botonEliminar.textContent = '🗑️';
+        botonEliminar.classList.add('eliminar-publicacion');
+        botonEliminar.setAttribute('data-id', publicacion.id_publi); // Aquí guardamos el ID de la publicación como un atributo data-id
+        botonEliminar.addEventListener('click', () => {
+            eliminarPublicacion(publicacion.id_publi);
+        });
 
-        // Vamos agregando divs con la información de cada publicación.
-        tbody.innerHTML += `
-           <!DOCTYPE html>
-<html lang="en">
+        // Creamos un div para la publicación
+        const divPublicacion = document.createElement('div');
+        divPublicacion.classList.add('post');
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publicación</title>
-    <style>
-        .post-header-info button {
-    margin-left:380px;
-    background-color: rgb(230, 70, 82);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-}
-   
-    </style>
-</head>
-
-<body>
-    <div class="post">
-        <div class="post-header">
-            <div class="post-header-info">
-                <h3>${publicacion.titulo}</h3>
-                <button>🗑️</button>
+        // HTML de la publicación
+        divPublicacion.innerHTML = `
+            <div class="post-header">
+                <div class="post-header-info">
+                    <h3>${publicacion.titulo}</h3>
+                </div>
             </div>
-        </div>
-        <div class="post-content">
-            <p>${publicacion.contenido}</p>
-            <img src="${publicacion.imagen_url}" alt="${publicacion.titulo}" />
-        </div>
-        <div class="post-actions">
-            <button>Me gusta</button>
-            <button>Comentar</button>
-            <button>Compartir</button>
-        </div>
-    </div>
-</body>
-
-</html>
-
+            <div class="post-content">
+                <p>${publicacion.contenido}</p>
+                <img src="${publicacion.imagen_url}" alt="${publicacion.titulo}" />
+            </div>
+            <div class="post-actions">
+                <button>Me gusta</button>
+                <button>Comentar</button>
+                <button>Compartir</button>
+            </div>
         `;
+
+        // Agregamos el botón de eliminar al header de la publicación
+        divPublicacion.querySelector('.post-header-info').appendChild(botonEliminar);
+
+        // Agregamos la publicación al tbody o div
+        tbody.appendChild(divPublicacion);
     });
 };
+
+// Función para eliminar una publicación
+const eliminarPublicacion = async (id) => {
+    try {
+        const response = await fetch(`http://localhost:4000/publicacion/${id}`, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Publicación eliminada:', data);
+            // Volver a obtener y mostrar las publicaciones actualizadas después de eliminar
+            obtenerPublicaciones();
+        } else {
+            throw new Error('Error al eliminar la publicación');
+        }
+    } catch (error) {
+        console.error('Error al eliminar publicación:', error);
+        throw error; // Asegúrate de lanzar el error para manejarlo correctamente en el frontend
+    }
+};
+
 // Función para obtener las publicaciones.
 const obtenerPublicaciones = async () => {
     try {
