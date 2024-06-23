@@ -3,6 +3,7 @@
 <head>
 	<title>Maps</title>
 	<link rel="stylesheet" type="text/css" href="estilo.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <style>
     #map {
@@ -12,6 +13,24 @@
 
 </style>
 <body>
+    <header class="header">
+        <div class="logo">
+            <img src="./assets/img/logo.jpg" alt="Logo de la marca">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Foro</a></li>
+                <li><a href="eventos.html">Eventos</a></li>
+                <li><a href="subirPubli.html">Busca Mascota</a></li>
+                <li><a href="mapa.html">Mapa</a></li>
+            </ul>
+        </nav>
+        <div class="btn-container" id="navv">
+            <a id="loginBtn" class="btn" href="iniciarSesion.html"><button>Iniciar Sesion</button></a>
+            <a id="logoutBtn" class="btn" style="display: none;" href="#"><button>Cerrar Sesion</button></a>
+            <span id="username" style="display: none;"></span>
+        </div>
+    </header>
 	<div id="map"></div>
 <script src="./assets/js/mapa.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script>
