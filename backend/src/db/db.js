@@ -17,6 +17,7 @@ const newConex = async () => {
 newConex()
     .then(connection => {
         // Hacer algo con la conexión
+        connection.end();
     })
     .catch(error => {
         console.error("Error en la conexión:", error);
@@ -25,4 +26,3 @@ newConex()
 module.exports ={
     newConex
 }
- newConex.end();
