@@ -146,3 +146,105 @@ body {
 .post-actions button:hover {
     background-color: #e9ebee;
 }
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estilos del botón */
+  .boton-subir {
+    position: fixed;
+    bottom: 20px; /* Distancia desde la parte inferior */
+    right: 20px; /* Distancia desde la parte derecha */
+    background-color: rgb(230, 70, 82); /* Color de fondo */
+    color: #fff; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    text-decoration: none; /* Quitar subrayado del texto */
+    transition: background-color 0.3s; /* Transición al cambiar color de fondo */
+  }
+  
+  .boton-subir:hover {
+    background-color: rgb(255, 0, 17); /* Color de fondo al pasar el ratón por encima */
+  }
+  
+
+  .boton-eliminar {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: white; /* Color del texto blanco */
+    border: none; /* Sin borde */
+    padding: 5px 10px; /* Espaciado interno */
+    cursor: pointer; /* Cambiar el cursor a pointer al pasar por encima */
+    border-radius: 3px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+}
+
+.boton-eliminar:hover {
+    background-color: #c82333; /* Color de fondo más oscuro al pasar el ratón */
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    
+}
+
+.post {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.post-header-info {
+    display: flex;
+    align-items: center;
+}
+
+.post-header-info h3 {
+    margin: 0;
+    margin-right: 10px;
+}
+
+
+
+.post-content {
+    margin-bottom: 10px;
+}
+
+.post-content p {
+    margin: 0;
+}
+
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.post-actions button {
+    margin-right: 10px;
+    padding: 8px 16px;
+    border: none;
+    background-color: rgb(230, 70, 82);
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.post-actions button:hover {
+    background-color: #0056b3;
+}
