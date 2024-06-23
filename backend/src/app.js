@@ -16,6 +16,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../../Client')));
 app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Servir archivos estáticos desde la carpeta 'Client'
 app.use(express.static(path.join(__dirname, '../backend/Client')));
