@@ -1,8 +1,10 @@
-const mysql2 = require("mysql2/promise");
+// db.js
+
+const mysql = require("mysql2/promise");
 
 const newConex = async () => {
     try {
-        const conex = await mysql2.createConnection({
+        const conex = await mysql.createConnection({
             host: "localhost",
             user: "root",
             database: "hogaranimales"
@@ -12,17 +14,8 @@ const newConex = async () => {
     } catch (error) {
         throw error;
     }
-}
+};
 
-newConex()
-    .then(connection => {
-        // Hacer algo con la conexión
-        connection.end();
-    })
-    .catch(error => {
-        console.error("Error en la conexión:", error);
-    });
-
-module.exports ={
+module.exports = {
     newConex
-}
+};

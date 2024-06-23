@@ -1,44 +1,32 @@
-//Tomamos el form del html.
-const form = document.getElementById('form_publi')
+const form = document.getElementById('form_publi');
 
-// Funcion para registrarse
-const register = async (e) => {
-
-    // Evitamos el evento submit.
+const uploadPublication = async (e) => {
     e.preventDefault();
+
     const token = localStorage.getItem('token');
-    // Tomamos los valores de los inputs.
-    const titulo = document.getElementById('title').value;
-    // const image = document.getElementById('image').value;
-    const desc = document.getElementById('description').value;
+    const formData = new FormData(form);  // FormData creado a partir del formulario 'form_publi'
 
-    // Realizamos la peticion a nuestro servidor.
-    const peticion = await fetch('http://localhost:4000/subir', {
-        method: 'POST',
-        body: JSON.stringify({titulo, desc}),
-        headers: {
-            'Content-type': 'application/json',
-            'token': token
+    try {
+        const response = await fetch('http://localhost:4000/subir', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            alert(data.msg);
+            window.location.href = '/index.html';
+        } else {
+            const errorData = await response.json();
+            throw new Error(errorData.msg);
         }
-    })
-
-    // Convertimos en json la respuesta.
-    const respuesta = await peticion.json();
-
-    // En caso de que falle la peticion, mostrar el mensaje de error.
-    if(!peticion.ok){
-        alert(respuesta.msg)
-    } else {
-
-        //Caso contrario, mostramos el mensaje.
-        alert(respuesta.msg)
-
-        // Redirigimos al usuario al login.
-        window.location.href = '/index.html'
+    } catch (error) {
+        console.error('Error al subir la publicación:', error.message);
+        alert('Error al subir la publicación. Inténtalo de nuevo más tarde.');
     }
+};
 
-}
-
-form.addEventListener('submit', register);
-
-
+form.addEventListener('submit', uploadPublication);
