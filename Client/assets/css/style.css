@@ -204,7 +204,7 @@ body {
 .post-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-bottom: 10px;
 }
 
@@ -247,4 +247,16 @@ body {
 
 .post-actions button:hover {
     background-color: #0056b3;
+}
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.eliminar-publicacion {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
 }

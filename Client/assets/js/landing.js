@@ -29,6 +29,9 @@ const pintarPublicaciones = (data) => {
                 <div class="post-header-info">
                     <h3>${publicacion.titulo}</h3>
                 </div>
+                <div class="post-header-right">
+                    <button class="eliminar-publicacion" data-id="${publicacion.id_publi}">🗑️</button>
+                </div>
             </div>
             <div class="post-content">
                 <p>${publicacion.contenido}</p>
@@ -40,9 +43,6 @@ const pintarPublicaciones = (data) => {
                 <button>Compartir</button>
             </div>
         `;
-
-        // Agregamos el botón de eliminar al header de la publicación
-        divPublicacion.querySelector('.post-header-info').appendChild(botonEliminar);
 
         // Agregamos la publicación al tbody o div
         tbody.appendChild(divPublicacion);
