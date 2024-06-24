@@ -6,19 +6,8 @@ const pintarPublicaciones = (data) => {
     // Reseteamos el contenido html del tbody o div
     tbody.innerHTML = '';
 
-    // Verificar qué propiedades tiene cada objeto de publicacion
-
     // Recorremos todas las publicaciones con un forEach
     data.forEach((publicacion, index) => {
-        // Creamos un botón de eliminar por cada publicación
-        const botonEliminar = document.createElement('button');
-        botonEliminar.textContent = '🗑️';
-        botonEliminar.classList.add('eliminar-publicacion');
-        botonEliminar.setAttribute('data-id', publicacion.id_publi); // Aquí guardamos el ID de la publicación como un atributo data-id
-        botonEliminar.addEventListener('click', () => {
-            eliminarPublicacion(publicacion.id_publi);
-        });
-
         // Creamos un div para la publicación
         const divPublicacion = document.createElement('div');
         divPublicacion.classList.add('post');
@@ -44,6 +33,11 @@ const pintarPublicaciones = (data) => {
             </div>
         `;
 
+        // Añadir evento al botón de eliminar
+        divPublicacion.querySelector('.eliminar-publicacion').addEventListener('click', () => {
+            eliminarPublicacion(publicacion.id_publi);
+        });
+
         // Agregamos la publicación al tbody o div
         tbody.appendChild(divPublicacion);
     });
@@ -66,7 +60,6 @@ const eliminarPublicacion = async (id) => {
         }
     } catch (error) {
         console.error('Error al eliminar publicación:', error);
-        throw error; // Asegúrate de lanzar el error para manejarlo correctamente en el frontend
     }
 };
 
