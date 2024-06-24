@@ -4,6 +4,7 @@ const { newConex } = require("../db/db.js");
 const generarJWT = require("../helpers/generarJWT.js");
 const validarJWT = require("../helpers//validarJWT");
 
+
 const registerUser = async (req, res) => {
     const { username, email, password } = req.body;
 
@@ -47,15 +48,23 @@ const login = async (req, res) => {
         const conex = await newConex();
 
         // Consulta para verificar las credenciales del usuario
-        const [usuario] = await conex.query("SELECT id_usuario FROM usuarios WHERE nombre_usuario = ? AND contraseña = ?", [username, password]);
+        const [result] = await conex.query("SELECT id_usuario, nombre_usuario, contraseña FROM usuarios WHERE nombre_usuario = ?", [username]);
 
-        // Si no se encuentra el usuario, devolver un error de credenciales inválidas
-        if (!usuario) {
-            return res.status(401).send("Credenciales inválidas");
+        // Si no se encuentra el usuario, devolver un mensaje indicando que debe registrarse
+        if (result.length === 0) {
+            await conex.end();
+            return res.status(401).json({ message: "Usuario no registrado. Por favor, regístrese." });
+        }
+
+        // Verificar la contraseña
+        const usuario = result[0];
+        if (usuario.contraseña !== password) {
+            await conex.end();
+            return res.status(401).json({ message: "Credenciales inválidas" });
         }
 
         // Generar el token JWT con el ID del usuario
-        const token = await generarJWT({ id: usuario.id });
+        const token = await generarJWT({ id: usuario.id_usuario });
 
         // Cerrar la conexión a la base de datos
         await conex.end();
