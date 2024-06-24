@@ -9,12 +9,29 @@
 <body>
     <header class="header">
         <div class="logo">
-            <a href="index.html"><img src="assets/img/logo.jpg" alt="Logo de la marca"></a>
+            <img src="./assets/img/logo.jpg" alt="Logo de la marca">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Foro</a></li>
+                <li><a href="eventos.html">Eventos</a></li>
+                <li><a href="adopcion.html">Busca Mascota</a></li>
+                <li><a href="mapa.html">Mapa</a></li>
+            </ul>
+        </nav>
+        <div class="btn-container" id="navv">
+            <span id="username" style="display: none;"></span>
         </div>
     </header>
     <main>
         <div class="login-container">
-            <h2>Iniciar Sesión</h2>
+            <div class="back-arrow-container">
+                <a href="index.html" class="back-arrow">
+                    <img src="https://st4.depositphotos.com/1000507/23538/v/450/depositphotos_235388564-stock-illustration-back-clockwise-arrow-icon-simple.jpg" alt="Flecha hacia atrás" height="30px" width="40px" fill="#000000">
+
+                </a>
+                <h2 style="margin: 0 0 0 10px; padding-left: 9%;" >Iniciar Sesión</h2>
+            </div>
             <form id="loginForm">
                 <div class="form-group">
                     <label for="username">Correo Electrónico</label>

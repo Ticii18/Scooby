@@ -1,9 +1,7 @@
-// backend/src/controllers/auth.controller.js
-
 const { newConex } = require("../db/db.js");
 const generarJWT = require("../helpers/generarJWT.js");
-const validarJWT = require("../helpers//validarJWT");
-
+const validarJWT = require("../helpers/validarJWT");
+const bcrypt = require('bcrypt');
 
 const registerUser = async (req, res) => {
     const { username, email, password } = req.body;
@@ -17,8 +15,11 @@ const registerUser = async (req, res) => {
         // Crear una nueva conexión a la base de datos
         const conex = await newConex();
 
+        // Encriptar la contraseña antes de almacenarla
+        const hashedPassword = bcrypt.hashSync(password, 10); // El segundo parámetro es el número de veces que se ejecuta el algoritmo de encriptación.
+
         // Consulta para insertar los datos del usuario en la base de datos
-        await conex.query("INSERT INTO usuarios (nombre_usuario, email, contraseña) VALUES (?, ?, ?)", [username, email, password]);
+        await conex.query("INSERT INTO usuarios (nombre_usuario, email, contraseña) VALUES (?, ?, ?)", [username, email, hashedPassword]);
 
         // Cerrar la conexión a la base de datos
         await conex.end();
@@ -27,7 +28,7 @@ const registerUser = async (req, res) => {
         const token = await generarJWT({ username, email });
 
         // Enviar el token como respuesta
-        res.send("Se registro correctamente");
+        res.json({ message: "Se registró correctamente" });
     } catch (error) {
         // Manejar errores
         console.error("Error al registrar usuario:", error);
@@ -58,9 +59,14 @@ const login = async (req, res) => {
 
         // Verificar la contraseña
         const usuario = result[0];
-        if (usuario.contraseña !== password) {
+        const validarContrasenia = bcrypt.compareSync(password, usuario.contraseña);
+
+        // En caso de que no coincidan, retornamos un error sin dar información específica de lo que falló.
+        if (!validarContrasenia) {
             await conex.end();
-            return res.status(401).json({ message: "Credenciales inválidas" });
+            return res.status(401).json({
+                msg: 'El usuario o contraseña no coinciden'
+            });
         }
 
         // Generar el token JWT con el ID del usuario
@@ -69,8 +75,11 @@ const login = async (req, res) => {
         // Cerrar la conexión a la base de datos
         await conex.end();
 
-        // Enviar el token y el nombre de usuario como respuesta
-        res.send({ token, username: usuario.nombre_usuario });
+        // Retornar el token con un mensaje al cliente.
+        res.json({
+            msg: 'Inicio de sesión exitoso',
+            token
+        });
     } catch (error) {
         // Manejar errores
         console.error("Error al iniciar sesión:", error);
