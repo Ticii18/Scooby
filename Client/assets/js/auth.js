@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
         // En caso de que si exista el token, mostraremos un boton de cerrar sesión.
         document.getElementById('navv').innerHTML = `<a class="btn" href="" id="logout"><button>Cerrar Sesion</button></a>`;
-
+        document.getElementById('publiEstilo').innerHTML = `    <a href="subirPubli.html" class="boton-subir">Subir Publicación</a>
+`;
 
         // Le agregamos un evento click a dicho boton.
         document.getElementById('logout').addEventListener('click', ()=> {

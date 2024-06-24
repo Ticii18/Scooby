@@ -1,7 +1,5 @@
 const { newConex } = require("../db/db.js");
 const generarJWT = require("../helpers/generarJWT.js");
-const validarJWT = require("../helpers/validarJWT");
-const bcrypt = require('bcrypt');
 
 const registerUser = async (req, res) => {
     const { username, email, password } = req.body;
@@ -15,11 +13,8 @@ const registerUser = async (req, res) => {
         // Crear una nueva conexión a la base de datos
         const conex = await newConex();
 
-        // Encriptar la contraseña antes de almacenarla
-        const hashedPassword = bcrypt.hashSync(password, 10); // El segundo parámetro es el número de veces que se ejecuta el algoritmo de encriptación.
-
         // Consulta para insertar los datos del usuario en la base de datos
-        await conex.query("INSERT INTO usuarios (nombre_usuario, email, contraseña) VALUES (?, ?, ?)", [username, email, hashedPassword]);
+        await conex.query("INSERT INTO usuarios (nombre_usuario, email, contraseña) VALUES (?, ?, ?)", [username, email, password]);
 
         // Cerrar la conexión a la base de datos
         await conex.end();
@@ -28,7 +23,7 @@ const registerUser = async (req, res) => {
         const token = await generarJWT({ username, email });
 
         // Enviar el token como respuesta
-        res.json({ message: "Se registró correctamente" });
+        res.json("Se agrego correctamente el usuario");
     } catch (error) {
         // Manejar errores
         console.error("Error al registrar usuario:", error);
@@ -57,16 +52,11 @@ const login = async (req, res) => {
             return res.status(401).json({ message: "Usuario no registrado. Por favor, regístrese." });
         }
 
-        // Verificar la contraseña
+        // Verificar la contraseña (sin cifrar)
         const usuario = result[0];
-        const validarContrasenia = bcrypt.compareSync(password, usuario.contraseña);
-
-        // En caso de que no coincidan, retornamos un error sin dar información específica de lo que falló.
-        if (!validarContrasenia) {
+        if (password !== usuario.contraseña) {
             await conex.end();
-            return res.status(401).json({
-                msg: 'El usuario o contraseña no coinciden'
-            });
+            return res.status(401).json({ message: "El usuario o la contraseña no coinciden" });
         }
 
         // Generar el token JWT con el ID del usuario
