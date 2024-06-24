@@ -21,6 +21,7 @@ Este sistema permite a los usuarios subir publicaciones sobre animales perdidos.
   - JavaScript 
 - **Backend**: 
   - Node.js
+  -JavaScript 
 - **Base de Datos**: 
   - MYSQL
 - **Autenticación**: 
