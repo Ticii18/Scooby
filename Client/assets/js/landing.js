@@ -6,8 +6,11 @@ const pintarPublicaciones = (data) => {
     // Reseteamos el contenido html del tbody o div
     tbody.innerHTML = '';
 
+    // Verificar el orden de las publicaciones en el frontend
+    console.log('Publicaciones recibidas:', data);
+
     // Recorremos todas las publicaciones con un forEach
-    data.forEach((publicacion, index) => {
+    data.forEach((publicacion) => {
         // Creamos un div para la publicación
         const divPublicacion = document.createElement('div');
         divPublicacion.classList.add('post');
@@ -70,6 +73,7 @@ const obtenerPublicaciones = async () => {
 
         if (response.ok) {
             const data = await response.json();
+            console.log('Publicaciones obtenidas:', data); // Verificar el orden de las publicaciones en el frontend
             pintarPublicaciones(data);
         } else {
             throw new Error('Error al obtener las publicaciones');

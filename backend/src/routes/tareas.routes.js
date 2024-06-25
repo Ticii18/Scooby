@@ -6,7 +6,7 @@ const { newConex } = require('../db/db');
 router.get('/', async (req, res) => {
     try {
         const conexion = await newConex();
-        const [publicaciones] = await conexion.query('SELECT * FROM publicaciones');
+        const [publicaciones] = await conexion.query('SELECT * FROM publicaciones order by id_publi DESC')
         await conexion.end();
 
         console.log(publicaciones); // Verificar los datos que se envían al frontend
